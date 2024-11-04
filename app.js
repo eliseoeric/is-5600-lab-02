@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // get the list element and for each user create a list item and append it to the list
   
     const userList = document.querySelector(".user-list");
-    userList.innerHTML == "";
+    userList.innerHTML = "";
   
     users.map(({ user, id }) => {
       const listItem = document.createElement("li");
