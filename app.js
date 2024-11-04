@@ -98,4 +98,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  //6 Delete User
+  function deleteUser(users, stocks) {
+    const userId = document.querySelector('#userID').value;
+    const userIndex = users.findIndex(user => user.id == userId);
+  
+    if (userIndex !== -1) {
+      users.splice(userIndex, 1); // Remove user from array
+      renderUserList(users, stocks); // Refresh user list display
+    }
+  }
   
