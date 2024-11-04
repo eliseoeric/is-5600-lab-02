@@ -85,4 +85,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
   
+  // 5 View Stock Details
+  function viewStockDetails(symbol, stocks) {
+    const stockData = stocks.find(stock => stock.symbol === symbol);
+  
+    if (stockData) {
+      document.querySelector('#stockName').textContent = stockData.name;
+      document.querySelector('#stockSector').textContent = stockData.sector;
+      document.querySelector('#stockIndustry').textContent = stockData.subIndustry;
+      document.querySelector('#stockAddress').textContent = stockData.address;
+      document.querySelector('#logo').src = `logos/${symbol}.svg`;
+    }
+  }
+
   
