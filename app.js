@@ -54,4 +54,35 @@ document.addEventListener('DOMContentLoaded', () => {
       renderPortfolio(selectedUser, stocks);
     }
   }
+
+  // Render Portfolio
+  function renderPortfolio(user, stocks) {
+    const portfolioContainer = document.querySelector('.portfolio-list');
+    portfolioContainer.innerHTML = ''; // Clear previous entries
+  
+    user.portfolio.forEach(({ symbol, owned }) => {
+      const stockElement = document.createElement('div');
+      stockElement.classList.add('portfolio-item');
+      
+      const symbolText = document.createElement('p');
+      symbolText.textContent = `Symbol: ${symbol}`;
+      const sharesText = document.createElement('p');
+      sharesText.textContent = `Owned: ${owned}`;
+      const viewButton = document.createElement('button');
+      viewButton.textContent = 'View';
+      viewButton.dataset.symbol = symbol; // Attach symbol to button
+  
+      // Append elements to portfolio item
+      stockElement.append(symbolText, sharesText, viewButton);
+      portfolioContainer.appendChild(stockElement);
+    });
+  
+    // View button event delegation for stock details
+    portfolioContainer.addEventListener('click', (event) => {
+      if (event.target.tagName === 'BUTTON') {
+        viewStockDetails(event.target.dataset.symbol, stocks);
+      }
+    });
+  }
+  
   
