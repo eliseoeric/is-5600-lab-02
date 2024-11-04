@@ -38,4 +38,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
   
+  // 3  User Details
+  function displayUserDetails(userId, users, stocks) {
+    const selectedUser = users.find(user => user.id == userId);
+  
+    if (selectedUser) {
+      document.querySelector('#userID').value = selectedUser.id;
+      document.querySelector('#firstname').value = selectedUser.user.firstname;
+      document.querySelector('#lastname').value = selectedUser.user.lastname;
+      document.querySelector('#address').value = selectedUser.user.address;
+      document.querySelector('#city').value = selectedUser.user.city;
+      document.querySelector('#email').value = selectedUser.user.email;
+  
+      // Display the user's stock portfolio
+      renderPortfolio(selectedUser, stocks);
+    }
+  }
   
