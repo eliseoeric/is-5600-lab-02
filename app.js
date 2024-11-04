@@ -109,3 +109,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
   
+  // 7 Update User Information
+  function updateUser(users, stocks) {
+    const userId = document.querySelector('#userID').value;
+    const userToUpdate = users.find(user => user.id == userId);
+  
+    if (userToUpdate) {
+      userToUpdate.user.firstname = document.querySelector('#firstname').value;
+      userToUpdate.user.lastname = document.querySelector('#lastname').value;
+      userToUpdate.user.address = document.querySelector('#address').value;
+      userToUpdate.user.city = document.querySelector('#city').value;
+      userToUpdate.user.email = document.querySelector('#email').value;
+  
+      renderUserList(users, stocks); // Refresh user list with updated info
+    }
+  }
+  
