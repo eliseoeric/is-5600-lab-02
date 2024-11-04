@@ -18,5 +18,24 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
   
- 
+ // 2 Render User list
+ function renderUserList(users, stocks) {
+    const userListElement = document.querySelector('.user-list');
+    userListElement.innerHTML = ''; // Clear previous list
+  
+    users.forEach(({ user, id }) => {
+      const userItem = document.createElement('li');
+      userItem.textContent = `${user.lastname}, ${user.firstname}`;
+      userItem.dataset.userId = id; // Set user ID for identification
+      userListElement.appendChild(userItem);
+    });
+  
+    // Add click event listener to display selected user info
+    userListElement.addEventListener('click', (event) => {
+      if (event.target.tagName === 'LI') {
+        displayUserDetails(event.target.dataset.userId, users, stocks);
+      }
+    });
+  }
+  
   
