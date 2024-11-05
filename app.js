@@ -86,3 +86,33 @@ const  populateForm = (data)=>{
          }
     }
 
+    deleteButton.addEventListener('click', (event)=>{
+        event.preventDefault()
+        const userId = document.querySelector('#userID').value;
+        const userIndex = userData.findIndex(user => user.id == userId);
+        userData.splice(userIndex, 1);
+        generateUserList(userData, stocksData);
+    })
+
+    saveButton.addEventListener('click', (event) => {
+        event.preventDefault();
+        const id = document.querySelector('#userID').value;
+
+        for (let i=0; i<userData.length; i++) {
+            if (userData[i].id == id) {
+
+                userData[i].user.firstname = document.querySelector('#firstname').value;
+                userData[i].user.lastname = document.querySelector('#lastname').value;
+                userData[i].user.address = document.querySelector('#address').value;
+                userData[i].user.city = document.querySelector('#city').value;
+                userData[i].user.email = document.querySelector('#email').value;     
+
+                generateUserList(userData, stocksData);
+            }
+        }
+      });
+
+    generateUserList(userData, stocksData);
+
+
+});
