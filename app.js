@@ -32,3 +32,29 @@ function handleUserListClick(event,users,stocks){
 
 }
 
+function renderPortfolio(user,stocks){
+    const { portfolio }= user;
+    const portfolioDetails = document.querySelector('.portfolio-list');
+         portfolioDetails.innerHTML = '';
+  portfolio.map(({ symbol, owned }) => {
+    const symbolEl = document.createElement('p');
+    const sharesEl = document.createElement('p');
+        const actionEl = document.createElement('button');
+    symbolEl.innerText = symbol;
+    sharesEl.innerText = owned;
+    actionEl.innerText = 'View';
+    actionEl.setAttribute('id', symbol);
+    portfolioDetails.appendChild(symbolEl);
+    portfolioDetails.appendChild(sharesEl);
+    portfolioDetails.appendChild(actionEl)
+
+    portfolioDetails.addEventListener('click', (event) => {
+        if (event.target.tagName === 'BUTTON') {
+            console.log(event.target.id)
+          viewStock(event.target.id, stocks);
+        }
+      });
+  });
+
+
+}
