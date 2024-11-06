@@ -22,3 +22,13 @@ function generateUserList(users,stocks ){
     });
 
 }
+
+function handleUserListClick(event,users,stocks){
+    const userId=  event.target.id
+    const user = users.find(user => user.id == userId);
+    console.log(user)
+    populateForm(user);
+    renderPortfolio(user, stocks);
+
+
+}
