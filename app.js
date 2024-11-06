@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
+    let userData = JSON.parse(userContent);  // use let for reassignment
     const stocksData = JSON.parse(stockContent);
-    const userData = JSON.parse(userContent);
 
     const deleteButton = document.querySelector('#btnDelete');
     const saveButton = document.querySelector('#btnSave');
@@ -13,34 +13,38 @@ document.addEventListener('DOMContentLoaded', () => {
         const userId = document.querySelector('#userID').value;
         const userIndex = userData.findIndex(user => user.id == userId);
         
-        userData.splice(userIndex, 1);
-        generateUserList(userData, stocksData);
-    })
+        if (userIndex !== -1) {  // check if user exists
+            userData.splice(userIndex, 1);
+            generateUserList(userData, stocksData);
+        }
+    });
 
     saveButton.addEventListener('click', (event) => {
-        e.preventDefault();
+        event.preventDefault();
+        
         const id = document.querySelector('#userID').value;
         const userIndex = userData.findIndex(user => user.id == id);
 
-        const newUser = [
-            ...userData.slice(0, userIndex),
-            {
-                ...userData[userIndex],
-                user: {
-                    firstname: document.querySelector('#firstname').value,
-                    lastname: document.querySelector('#lastname').value,
-                    address: document.querySelector('#address').value,
-                    city: document.querySelector('#city').value,
-                    email: document.querySelector('#email').value,
+        if (userIndex !== -1) {  // check if user exists
+            const newUsers = [
+                ...userData.slice(0, userIndex),
+                {
+                    ...userData[userIndex],
+                    user: {
+                        firstname: document.querySelector('#firstname').value,
+                        lastname: document.querySelector('#lastname').value,
+                        address: document.querySelector('#address').value,
+                        city: document.querySelector('#city').value,
+                        email: document.querySelector('#email').value,
+                    },
                 },
-            },
-            ...userData.slice(userIndex + 1)
-        ];
+                ...userData.slice(userIndex + 1)
+            ];
 
-        generateUserList(newUsers, stocksData);
-        
-    })
-    
+            userData = newUsers;
+            generateUserList(userData, stocksData);
+        }
+    });
     
     function generateUserList(users, stocks) {
         const userList = document.querySelector('.user-list');
@@ -51,44 +55,44 @@ document.addEventListener('DOMContentLoaded', () => {
             listItem.innerText = user.lastname + ', ' + user.firstname;
             listItem.setAttribute('id', id);
             userList.appendChild(listItem);
-          })
+        });
 
-          userList.addEventListener('click', (event) => handleUserListClick(event, users, stocks));
-
+        userList.addEventListener('click', (event) => handleUserListClick(event, users, stocks));
     }
 
     function handleUserListClick(event, users, stocks) {
         const userId = event.target.id;
         const user = users.find(user => user.id == userId);
         
-        populateForm(user);
-        renderPortfolio(user, stocks);
+        if (user) {
+            populateForm(user);
+            renderPortfolio(user, stocks);
+        }
     }
 
     function renderPortfolio(user, stocks) {
         const { portfolio } = user;
         const portfolioDetails = document.querySelector('.portfolio-list');
-        // clear out the list
-        portfolioDetails.innerHTML = '';
+        portfolioDetails.innerHTML = '';  // clear out the list
 
-        portfolio.map(({ symbol, owned }) => {
+        portfolio.forEach(({ symbol, owned }) => {
             const symbolEl = document.createElement('p');
             const sharesEl = document.createElement('p');
             const actionEl = document.createElement('button');
             symbolEl.innerText = symbol;
-            sharesEl.inert = owned;
+            sharesEl.innerText = owned;  // corrected typo here
             actionEl.innerText = 'View';
             actionEl.setAttribute('id', symbol);
             portfolioDetails.appendChild(symbolEl);
             portfolioDetails.appendChild(sharesEl);
             portfolioDetails.appendChild(actionEl);
-        })
+        });
 
         portfolioDetails.addEventListener('click', (event) => {
             if (event.target.tagName === 'BUTTON') {
                 viewStock(event.target.id, stocks);
             }
-          });
+        });
     }
 
     function populateForm(data) {
@@ -100,18 +104,20 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('#address').value = user.address;
         document.querySelector('#city').value = user.city;
         document.querySelector('#email').value = user.email;
-        }
+    }
 
-        function viewStock(symbol, stocks) {
-            const stockArea = document.querySelector('.stock-form');
-            if (stockArea) {
-                const stock = stocks.find( function (s) { return s.symbol == symbol;});
+    function viewStock(symbol, stocks) {
+        const stockArea = document.querySelector('.stock-form');
+        if (stockArea) {
+            const stock = stocks.find(s => s.symbol == symbol);
+            if (stock) {
                 document.querySelector('#stockName').textContent = stock.name;
                 document.querySelector('#stockSector').textContent = stock.sector;
                 document.querySelector('#stockIndustry').textContent = stock.subIndustry;
                 document.querySelector('#stockAddress').textContent = stock.address;
                 
-                document.querySelector('#logo').src = logos/$(symbol).svg
+                document.querySelector('#logo').src = `logo/${symbol}.svg`;
             }
         }
-  });
+    }
+});
