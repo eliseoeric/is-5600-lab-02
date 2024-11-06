@@ -96,6 +96,7 @@ saveButton.addEventListener('click', (event) => {
             populateForm({ user: {}, id: "" });
             break;
         }
+        
     }
 });
 
