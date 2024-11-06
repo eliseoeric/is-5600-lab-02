@@ -20,7 +20,7 @@ function generateUserList(users, stocks) {
     userList.addEventListener('click', (event) => handleUserListClick(event, users, stocks));
 }
 
-// Handling User Click
+// Handling User Clicks
 function handleUserListClick(event, users, stocks) {
   const userId = event.target.id;
   const user = users.find(user => user.id == userId);
