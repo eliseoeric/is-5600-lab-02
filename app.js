@@ -124,6 +124,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Initial rendering of the user list
-    generateUserList(userData, stocksData);
+    generateUserList(userData);
     console.log({usersData});
 });
