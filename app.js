@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Select necessary DOM elements
     const deleteButton = document.querySelector('#deleteUser');
     const saveButton = document.querySelector('#saveUser');
-
+    generateUserList(userData,stocksData);
     // Function to generate the user list
     function generateUserList(users, stocks) {
         const userList = document.querySelector('.user-list');
