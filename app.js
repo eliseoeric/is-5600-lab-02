@@ -91,6 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+    
 
     function populateForm(data) {
         const { user, id } = data;
