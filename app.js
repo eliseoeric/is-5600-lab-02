@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
       listItem.setAttribute('id', id);
       userList.appendChild(listItem);
     });
-  
+
     // Add event listener to handle user clicks
     userList.removeEventListener('click', userListClickHandler);
     userList.addEventListener('click', (event) => userListClickHandler(event, users, stocks));
