@@ -140,6 +140,6 @@ document.addEventListener('DOMContentLoaded', () => {
       document.querySelector('#stockIndustry').textContent = stock.subIndustry;
       document.querySelector('#stockAddress').textContent = stock.address;
       document.querySelector('#logo').src = logos/${symbol}.svg;
-    }
+    } 
   }
 
