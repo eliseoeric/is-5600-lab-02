@@ -124,6 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  
   /**
    * Displays stock information for the selected symbol
    * @param {*} symbol - Stock symbol
