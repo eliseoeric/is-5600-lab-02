@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
     userList.removeEventListener('click', userListClickHandler);
     userList.addEventListener('click', (event) => userListClickHandler(event, users, stocks));
   }
-  
+
   /**
    * Handles user list click
    * @param {Event} event
