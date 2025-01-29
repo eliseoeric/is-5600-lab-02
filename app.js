@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function viewStock(symbol, stocks) {
     const stock = stocks.find(s => s.symbol == symbol);
     const stockArea = document.querySelector('.stock-form');
- 
+  
     if (stock) {
       stockArea.style.display = 'block';
       document.querySelector('#stockName').textContent = stock.name;
