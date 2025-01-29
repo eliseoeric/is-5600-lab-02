@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const stockArea = document.querySelector('.stock-form');
 
     if (stock) {
-      stockArea.style.display = 'block';
+      stockArea.style.display = 'block'; 
       document.querySelector('#stockName').textContent = stock.name;
       document.querySelector('#stockSector').textContent = stock.sector;
       document.querySelector('#stockIndustry').textContent = stock.subIndustry;
