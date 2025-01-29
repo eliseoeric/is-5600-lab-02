@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const stock = stocks.find(s => s.symbol == symbol);
     const stockArea = document.querySelector('.stock-form');
 
-    if (stock) {
+    if (stock) { 
       stockArea.style.display = 'block'; 
       document.querySelector('#stockName').textContent = stock.name;
       document.querySelector('#stockSector').textContent = stock.sector;
