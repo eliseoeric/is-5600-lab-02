@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  
+
   /**
    * Displays stock information for the selected symbol
    * @param {*} symbol - Stock symbol
@@ -134,6 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const stock = stocks.find(s => s.symbol == symbol);
     const stockArea = document.querySelector('.stock-form');
 
+    
     if (stock) {
       stockArea.style.display = 'block';
       document.querySelector('#stockName').textContent = stock.name;
