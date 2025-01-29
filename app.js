@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function userListClickHandler(event, users, stocks) {
     const userId = event.target.id;
     const user = users.find(user => user.id == userId);
-  
+
     if (user) {
       populateForm(user);
       renderPortfolio(user, stocks);
