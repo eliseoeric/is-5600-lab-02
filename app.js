@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
     });
-    
+
 
     deleteButton.addEventListener('click', (e) => {
       e.preventDefault();
@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+  
 
   /**
    * Renders the user list
