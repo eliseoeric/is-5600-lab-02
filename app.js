@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   });
-  
+
   /**
    * Renders the user list
    * @param {Array} users - User data array
