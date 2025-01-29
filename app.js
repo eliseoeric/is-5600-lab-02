@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
     });
+    
 
     deleteButton.addEventListener('click', (e) => {
       e.preventDefault();
