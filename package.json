@@ -9,5 +9,10 @@
   },
   "devDependencies": {
     "vite": "^2.9.9"
-  }
+  },
+  "description": "## Table of Contents",
+  "main": "app.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
