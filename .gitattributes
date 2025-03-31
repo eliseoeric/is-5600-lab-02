@@ -1,3 +1,6 @@
+https://github.com/eliseoeric/is-5600-lab-02.git
+git clone https://github.com/your-username/is-5600-lab-02.git
+cd is-5600-lab-02
 * text=auto eol=lf
 *.{cmd,[cC][mM][dD]} text eol=crlf
 *.{bat,[bB][aA][tT]} text eol=crlf
