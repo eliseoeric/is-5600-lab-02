@@ -2,9 +2,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const stocksData = JSON.parse(typeof stockContent === 'string' ? stockContent : '[]');
   const userData   = JSON.parse(typeof userContent  === 'string' ? userContent  : '[]');
 
-  const userListEl       = document.querySelector('.user-list');
-  const portfolioListEl  = document.querySelector('.portfolio-list');
-  const stockAreaEl      = document.querySelector('.stock-form');
+  const userListEl      = document.querySelector('.user-list');
+  const portfolioListEl = document.querySelector('.portfolio-list');
+  const stockAreaEl     = document.querySelector('.stock-form');
 
   const idEl      = document.querySelector('#userID');
   const firstEl   = document.querySelector('#firstname');
@@ -31,18 +31,18 @@ document.addEventListener('DOMContentLoaded', () => {
       li.setAttribute('data-id', id);
       userListEl.appendChild(li);
     });
-    userListEl.onclick = (evt) => handleUserListClick(evt, users, stocks);
+    userListEl.onclick = (e) => handleUserListClick(e, users, stocks);
   }
 
   function handleUserListClick(event, users, stocks) {
-    const target = event.target;
-    if (!(target instanceof HTMLElement)) return;
-    const userId = target.getAttribute('data-id');
+    const t = event.target;
+    if (!(t instanceof HTMLElement)) return;
+    const userId = t.getAttribute('data-id');
     if (!userId) return;
-    const userObj = users.find(u => String(u.id) === String(userId));
-    if (!userObj) return;
-    populateForm(userObj);
-    renderPortfolio(userObj, stocks);
+    const u = users.find(x => String(x.id) === String(userId));
+    if (!u) return;
+    populateForm(u);
+    renderPortfolio(u, stocks);
     clearStockPanel();
   }
 
@@ -63,36 +63,25 @@ document.addEventListener('DOMContentLoaded', () => {
     portfolio.forEach(({ symbol, owned }) => {
       const row = document.createElement('div');
       row.className = 'portfolio-row';
-      const symbolEl = document.createElement('p');
-      symbolEl.textContent = symbol;
-      const sharesEl = document.createElement('p');
-      sharesEl.textContent = owned;
+      const s = document.createElement('p');
+      s.textContent = symbol;
+      const sh = document.createElement('p');
+      sh.textContent = owned;
       const btn = document.createElement('button');
       btn.textContent = 'View';
       btn.setAttribute('data-symbol', symbol);
-      row.appendChild(symbolEl);
-      row.appendChild(sharesEl);
+      row.appendChild(s);
+      row.appendChild(sh);
       row.appendChild(btn);
       portfolioListEl.appendChild(row);
     });
-    portfolioListEl.onclick = (evt) => {
-      const t = evt.target;
+    portfolioListEl.onclick = (e) => {
+      const t = e.target;
       if (t && t.tagName === 'BUTTON') {
         const sym = t.getAttribute('data-symbol');
         if (sym) viewStock(sym, stocks);
       }
     };
-  }
-
-  function viewStock(symbol, stocks) {
-    if (!stockAreaEl) return;
-    const stock = stocks.find(s => String(s.symbol) === String(symbol));
-    if (!stock) return;
-    if (stockNameEl)     stockNameEl.textContent     = stock.name ?? '';
-    if (stockSectorEl)   stockSectorEl.textContent   = stock.sector ?? '';
-    if (stockIndustryEl) stockIndustryEl.textContent = stock.subIndustry ?? '';
-    if (stockAddrEl)     stockAddrEl.textContent     = stock.address ?? '';
-    if (logoImgEl)       logoImgEl.src = `logos/${symbol}.svg`;
   }
 
   function clearStockPanel() {
@@ -103,6 +92,40 @@ document.addEventListener('DOMContentLoaded', () => {
     if (logoImgEl)       logoImgEl.removeAttribute('src');
   }
 
+  function normalizeSymbolToFilename(symbol) {
+    return `logos/${String(symbol).toUpperCase().replace(/[^\w-]/g, '-')}.svg`;
+  }
+
+  const LOGO_OVERRIDES = {};
+
+  function setLogo(symbol) {
+    if (!logoImgEl) return;
+    const candidate = LOGO_OVERRIDES[symbol] || normalizeSymbolToFilename(symbol);
+    const img = new Image();
+    img.onload = () => {
+      logoImgEl.src = candidate;
+      logoImgEl.alt = `${symbol} logo`;
+      logoImgEl.style.display = '';
+    };
+    img.onerror = () => {
+      logoImgEl.src = 'logos/_placeholder.svg';
+      logoImgEl.alt = 'No logo available';
+      logoImgEl.style.display = '';
+    };
+    img.src = candidate;
+  }
+
+  function viewStock(symbol, stocks) {
+    if (!stockAreaEl) return;
+    const stock = stocks.find(s => String(s.symbol) === String(symbol));
+    if (!stock) return;
+    if (stockNameEl)     stockNameEl.textContent     = stock.name ?? '';
+    if (stockSectorEl)   stockSectorEl.textContent   = stock.sector ?? '';
+    if (stockIndustryEl) stockIndustryEl.textContent = stock.subIndustry ?? '';
+    if (stockAddrEl)     stockAddrEl.textContent     = stock.address ?? '';
+    setLogo(symbol);
+  }
+
   if (saveBtn) {
     saveBtn.addEventListener('click', (e) => {
       e.preventDefault();
@@ -110,15 +133,15 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!id) return;
       for (let i = 0; i < userData.length; i++) {
         if (String(userData[i].id) === String(id)) {
-          userData[i].user.firstname = firstEl?.value ?? userData[i].user.firstname;
-          userData[i].user.lastname  = lastEl?.value  ?? userData[i].user.lastname;
+          userData[i].user.firstname = firstEl?.value   ?? userData[i].user.firstname;
+          userData[i].user.lastname  = lastEl?.value    ?? userData[i].user.lastname;
           userData[i].user.address   = addressEl?.value ?? userData[i].user.address;
-          userData[i].user.city      = cityEl?.value ?? userData[i].user.city;
-          userData[i].user.email     = emailEl?.value ?? userData[i].user.email;
+          userData[i].user.city      = cityEl?.value    ?? userData[i].user.city;
+          userData[i].user.email     = emailEl?.value   ?? userData[i].user.email;
           generateUserList(userData, stocksData);
-          const stillThere = userData[i];
-          populateForm(stillThere);
-          renderPortfolio(stillThere, stocksData);
+          const current = userData[i];
+          populateForm(current);
+          renderPortfolio(current, stocksData);
           break;
         }
       }
