@@ -149,3 +149,26 @@ function renderPortfolio(event, users, stocks) {
     // render the user list
     generateUserList(userData, stocksData);
   });
+
+// Register the event listener on the save button
+  saveButton.addEventListener('click', (event) => {
+    // we don't want the form to submit (since we will lose form state)
+    e.preventDefault();
+
+    // find the user object in our data
+    const id = document.querySelector('#userID').value;
+
+    for (let i=0; i<users.length; i++) {
+        // found relevant user, so update object at this index and redisplay
+        if (users[i].id == id) {
+
+            users[i].user.firstname = document.querySelector('#firstname').value;
+            users[i].user.lastname = document.querySelector('#lastname').value;
+            users[i].user.address = document.querySelector('#address').value;
+            users[i].user.city = document.querySelector('#city').value;
+            users[i].user.email = document.querySelector('#email').value;     
+
+            generateUserList(users, stocks);
+        }
+    }
+  });
