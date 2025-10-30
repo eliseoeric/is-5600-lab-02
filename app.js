@@ -9,16 +9,13 @@ document.addEventListener('DOMContentLoaded', () => {
  * Loops through the users and renders a ul with li elements for each user
  * @param {*} users 
  */
-function generateUserList(users) {
+function generateUserList(users, stocks) {
   // get the list element and for each user create a list item and append it to the list
   const userList = document.querySelector('.user-list');
-  
-  users.map(({user, id}) => {
-    const listItem = document.createElement('li');
-    listItem.innerText = user.lastname + ', ' + user.firstname;
-    listItem.setAttribute('id', id);
-    userList.appendChild(listItem);
-  });
+  // clear out the list from previous render
+  userList.innerHTML = '';
+  // .. rest of function
+}
   // register the event listener on the list
   userList.addEventListener('click', (event) => handleUserListClick(event, users));
 }
