@@ -1,81 +1,288 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>Lab 02 | Stock Portfolio Dashboard</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stock Portfolio Dashboard</title>
 
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,400i,700" rel="stylesheet">
-  <link href="style.css" rel="stylesheet">
+  <style>
+    /* --- Global Styles --- */
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #f0f9ff, #e0f2fe, #c7d2fe);
+      color: #1e293b;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
 
-  <script src="/data/users.js"></script>
-  <script src="/data/stocks-complete.js"></script>
-  <script src="/app.js"></script>
+    header {
+      background: linear-gradient(90deg, #0ea5e9, #3b82f6, #6366f1);
+      color: #ffffff;
+      padding: 20px 0;
+      text-align: center;
+      font-size: 1.7rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    main {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    /* --- Sidebar --- */
+    .sidebar {
+      width: 25%;
+      background: linear-gradient(180deg, #fef2f2, #fee2e2);
+      padding: 20px;
+      border-right: 4px solid #fca5a5;
+      box-shadow: inset -3px 0 6px rgba(0, 0, 0, 0.1);
+      overflow-y: auto;
+    }
+
+    .sidebar h3 {
+      color: #b91c1c;
+      font-size: 1.3rem;
+      text-align: center;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #f87171;
+      padding-bottom: 5px;
+    }
+
+    .user-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .user-list li {
+      background: white;
+      color: #1e3a8a;
+      padding: 10px 12px;
+      margin: 6px 0;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.25s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .user-list li:hover {
+      background: linear-gradient(90deg, #93c5fd, #60a5fa, #3b82f6);
+      color: white;
+      transform: translateX(3px);
+      box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+    }
+
+    /* --- Content Area --- */
+    .content {
+      width: 75%;
+      padding: 25px;
+      background: linear-gradient(120deg, #fafafa, #f8fafc);
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      overflow-y: auto;
+    }
+
+    .user-form, .portfolio-form, .stock-form {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      border-left: 6px solid #3b82f6;
+      transition: transform 0.2s ease;
+    }
+
+    .user-form:hover,
+    .portfolio-form:hover,
+    .stock-form:hover {
+      transform: scale(1.01);
+    }
+
+    .user-form h3, .portfolio-form h3, .stock-form h3 {
+      color: #1e40af;
+      border-bottom: 2px solid #93c5fd;
+      padding-bottom: 5px;
+      margin-bottom: 10px;
+    }
+
+    label {
+      font-weight: 600;
+      color: #1e293b;
+      display: block;
+      margin-top: 10px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      outline: none;
+      transition: 0.2s;
+    }
+
+    input:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 5px rgba(59, 130, 246, 0.4);
+    }
+
+    .btn-group {
+      margin-top: 15px;
+      display: flex;
+      gap: 10px;
+    }
+
+    button {
+      padding: 10px 14px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    #saveUser {
+      background: linear-gradient(90deg, #22c55e, #16a34a);
+      color: white;
+    }
+
+    #saveUser:hover {
+      background: linear-gradient(90deg, #16a34a, #15803d);
+      transform: scale(1.05);
+    }
+
+    #deleteUser {
+      background: linear-gradient(90deg, #ef4444, #b91c1c);
+      color: white;
+    }
+
+    #deleteUser:hover {
+      background: linear-gradient(90deg, #dc2626, #991b1b);
+      transform: scale(1.05);
+    }
+
+    .portfolio-list {
+      margin-top: 15px;
+    }
+
+    .portfolio-list div {
+      background: linear-gradient(90deg, #fef9c3, #fde68a);
+      padding: 10px;
+      margin: 6px 0;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: 0.25s;
+    }
+
+    .portfolio-list div:hover {
+      background: linear-gradient(90deg, #facc15, #eab308);
+      color: white;
+      transform: translateX(5px);
+    }
+
+    .portfolio-list button {
+      background: #3b82f6;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 6px 10px;
+      cursor: pointer;
+      transition: 0.25s;
+    }
+
+    .portfolio-list button:hover {
+      background: #1d4ed8;
+    }
+
+    .stock-form {
+      background: linear-gradient(180deg, #f0f9ff, #e0f2fe, #dbeafe);
+      border-left: 6px solid #3b82f6;
+    }
+
+    .stock-form p {
+      margin: 5px 0;
+      font-size: 1rem;
+    }
+
+    .stock-form img {
+      width: 100px;
+      margin-top: 10px;
+      border-radius: 8px;
+      background: white;
+      padding: 5px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+  </style>
 </head>
-
 <body>
+  <header>📊 Stock Portfolio Dashboard</header>
 
-  <header>
-    <h1>Lab 02 | Stock Portfolio Dashboard</h1>
-  </header>
-  <main class="grid-container">
-
-    <section class="user-list-container">
-      <h2>Users</h2>
+  <main>
+    <!-- Sidebar: User List -->
+    <aside class="sidebar">
+      <h3>👥 Users</h3>
       <ul class="user-list"></ul>
-    </section>
+    </aside>
 
-    <section class="Details">
-      <div class="UserForm">
-        <h2>User Form</h2>
-        <form class="userEntry">
-          <input type=hidden id="userID" />
-          <label for="firstname">Name </label>
-          <input type=text id="firstname" class="one" />
-          <input type=text id="lastname" class="two" />
-          <label for="address">Address </label>
-          <input type=text id="address" class="one" />
-          <input type=text id="city" class="two" />
-          <label for="email">Email </label>
-          <input type=email id="email" class="both" />
-          <button class="one" id="btnSave">Save</button>
-          <button class="two" id="btnDelete">Delete</button>
+    <!-- Main Content -->
+    <section class="content">
+      <!-- User Info -->
+      <div class="user-form">
+        <h3>🧾 User Information</h3>
+        <form id="userForm">
+          <input type="hidden" id="userID" />
+          <label>First Name</label>
+          <input type="text" id="firstname" />
+          <label>Last Name</label>
+          <input type="text" id="lastname" />
+          <label>Address</label>
+          <input type="text" id="address" />
+          <label>City</label>
+          <input type="text" id="city" />
+          <label>Email</label>
+          <input type="text" id="email" />
+
+          <div class="btn-group">
+            <button id="saveUser">💾 Save</button>
+            <button id="deleteUser">🗑 Delete</button>
+          </div>
         </form>
       </div>
-      <div class="Portfolio">
-        <div class="StockList">
-          <h2>Portfolio</h2>
-          <div class="portfolio-list">
-            <h3>Symbol</h3>
-            <h3># Shares</h3>
-            <h3>Actions</h3>
-          </div>
-        </div>
-        <div class="StockDetails">
-          <h2>Details</h2>
-          <div class="stock-form">
-            <div class="logoContainer">
-              <img id="logo" />
-            </div>
-            <p class="stockLabel">Name</p>
-            <p id="stockName"></p>
-            <p class="stockLabel">Sector</p>
-            <p id="stockSector"></p>
-            <p class="stockLabel">Industry</p>
-            <p id="stockIndustry"></p>
-            <p class="stockLabel">Address</p>
-            <p id="stockAddress"></p>
-          </div>
 
-        </div>
+      <!-- Portfolio -->
+      <div class="portfolio-form">
+        <h3>📂 User Portfolio</h3>
+        <div class="portfolio-list"></div>
       </div>
 
+      <!-- Stock Info -->
+      <div class="stock-form">
+        <h3>🏢 Stock Information</h3>
+        <p><strong>Name:</strong> <span id="stockName"></span></p>
+        <p><strong>Sector:</strong> <span id="stockSector"></span></p>
+        <p><strong>Industry:</strong> <span id="stockIndustry"></span></p>
+        <p><strong>Address:</strong> <span id="stockAddress"></span></p>
+        <img id="logo" src="" alt="Stock Logo" />
+      </div>
     </section>
-
-
   </main>
 
-</body>
+  <!-- Load JSON Data -->
+  <script src="data/users.js"></script>
+  <script src="data/stocks-complete.js"></script>
 
+  <!-- Main JS -->
+  <script src="app.js"></script>
+</body>
 </html>
