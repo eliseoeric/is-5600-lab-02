@@ -167,7 +167,7 @@ function renderPortfolio(user, stocks) {
   // get the user's stock data
   const { portfolio } = user;
   // get the portfolio list element
-  const portfolioDetails = document.querySelector('.portfolio-list');
+   
   // clear the list from previous render
   portfolioDetails.innerHTML = '';
   // map over portfolio items and render them
