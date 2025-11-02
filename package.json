@@ -11,3 +11,17 @@
     "vite": "^2.9.9"
   }
 }
+  "name": "lab02-testing",
+  "version": "1.0.0",
+  "description": "Lab 02 - testing with Jest",
+  "main": "calculator.js",
+  "scripts": {
+      "test": "jest --runInBand"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+       "jest": "^29.0.0"
+  }
+  

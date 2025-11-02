@@ -213,3 +213,20 @@ vite@^2.9.9:
     rollup "^2.59.0"
   optionalDependencies:
     fsevents "~2.3.2"
+      resolved "https://registry.npmjs.org/esbuild-linux-64/-/esbuild-linux-64-0.14.39.tgz"
+    integrity sha512-4tcgFDYWdI+UbNMGlua9u1Zhu0N5R6u9tl5WOM8aVnNX143JZoBZLpCuUr5lCKhnD0SCO+5gUyMfupGrHtfggQ==
+    resolved "https://registry.npmjs.org/esbuild/-/esbuild-0.14.39.tgz"
+    @@ -128,48 +33,43 @@ esbuild@^0.14.27:
+    resolved "https://registry.npmjs.org/function-bind/-/function-bind-1.1.1.tgz"
+     resolved "https://registry.npmjs.org/has/-/has-1.0.3.tgz"
+     resolved "https://registry.npmjs.org/is-core-module/-/is-core-module-2.9.0.tgz"
+      resolved "https://registry.npmjs.org/nanoid/-/nanoid-3.3.4.tgz" 
+       resolved "https://registry.npmjs.org/path-parse/-/path-parse-1.0.7.tgz"
+       resolved "https://registry.npmjs.org/picocolors/-/picocolors-1.0.0.tgz"
+       resolved "https://registry.npmjs.org/postcss/-/postcss-8.4.13.tgz"
+       resolved "https://registry.npmjs.org/resolve/-/resolve-1.22.0.tgz"
+       resolved "https://registry.npmjs.org/rollup/-/rollup-2.73.0.tgz"
+        resolved "https://registry.npmjs.org/source-map-js/-/source-map-js-1.0.2.tgz"
+         resolved "https://registry.npmjs.org/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz"
+         resolved "https://registry.npmjs.org/vite/-/vite-2.9.9.tgz"
+         
