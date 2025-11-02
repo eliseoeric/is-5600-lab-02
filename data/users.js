@@ -30,4 +30,15 @@ const userContent = `
 {"id":29,"user":{"firstname":"Rosie","lastname":"Eliot","email":"reliots@upenn.edu","address":"365 Debs Lane","city":"Birmingham","state":"Alabama","zip":"35231"},"portfolio":[{"symbol":"MMM","owned":272},{"symbol":"HOG","owned":803},{"symbol":"DAL","owned":-229},{"symbol":"GIS","owned":387}]},
 {"id":30,"user":{"firstname":"Gates","lastname":"Reinbeck","email":"greinbeckt@biblegateway.com","address":"6 Stuart Plaza","city":"Fresno","state":"California","zip":"93786"},"portfolio":[{"symbol":"AJG","owned":320},{"symbol":"ED","owned":271}]}
 
-]`;
+]`;const users = JSON.parse(userContent).map(u => ({
+  id: u.id,
+  firstname: u.user.firstname,
+  lastname: u.user.lastname,
+  address: u.user.address,
+  city: u.user.city,
+  email: u.user.email,
+  portfolio: u.portfolio.map(p => ({
+    symbol: p.symbol,
+    shares: p.owned
+  }))
+}));
