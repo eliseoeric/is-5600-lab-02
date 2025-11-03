@@ -124,3 +124,4 @@ portfolioList.addEventListener("click", (e) => {
   img.onerror = () => img.removeAttribute("src");
 });
 
+
