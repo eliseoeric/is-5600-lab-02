@@ -1,4 +1,5 @@
-const userContent = `
+
+const userContent =
 [{"id":1,"user":{"firstname":"Jacquette","lastname":"Marion","email":"jmarion0@nyu.edu","address":"207 Ryan Avenue","city":"Lubbock","state":"Texas","zip":"79491"},"portfolio":[{"symbol":"NKE","owned":483},{"symbol":"NKE","owned":512},{"symbol":"K","owned":562},{"symbol":"GE","owned":288},{"symbol":"PSX","owned":465},{"symbol":"FDX","owned":263},{"symbol":"AAPL","owned":688},{"symbol":"NFLX","owned":828},{"symbol":"NFLX","owned":-211},{"symbol":"APC","owned":994}]},
 {"id":2,"user":{"firstname":"Vaughan","lastname":"Main","email":"vmain1@alexa.com","address":"56 Loeprich Drive","city":"Midland","state":"Texas","zip":"79705"},"portfolio":[{"symbol":"HAL","owned":775},{"symbol":"FB","owned":459}]},
 {"id":3,"user":{"firstname":"Matthus","lastname":"Harnes","email":"mharnes2@newyorker.com","address":"75504 Briar Crest Plaza","city":"Arlington","state":"Texas","zip":"76016"},"portfolio":[{"symbol":"MCD","owned":825},{"symbol":"TRIP","owned":728},{"symbol":"XEL","owned":110},{"symbol":"GE","owned":582},{"symbol":"WYN","owned":616},{"symbol":"GS","owned":1088}]},
@@ -30,4 +31,4 @@ const userContent = `
 {"id":29,"user":{"firstname":"Rosie","lastname":"Eliot","email":"reliots@upenn.edu","address":"365 Debs Lane","city":"Birmingham","state":"Alabama","zip":"35231"},"portfolio":[{"symbol":"MMM","owned":272},{"symbol":"HOG","owned":803},{"symbol":"DAL","owned":-229},{"symbol":"GIS","owned":387}]},
 {"id":30,"user":{"firstname":"Gates","lastname":"Reinbeck","email":"greinbeckt@biblegateway.com","address":"6 Stuart Plaza","city":"Fresno","state":"California","zip":"93786"},"portfolio":[{"symbol":"AJG","owned":320},{"symbol":"ED","owned":271}]}
 
-]`;
+];
