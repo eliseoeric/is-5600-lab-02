@@ -378,9 +378,181 @@ And that’s it! You’ve now completed your first lab assignment using GitHub a
 1. Open the terminal in Codespaces.
 2. Run the following commands to install dependencies and start the development server:
 
-    ```sh
-    npm install
-    npm run dev
+    // 🌟 Stock Portfolio Dashboard - Clean & Refactored
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Parse JSON data from global variables (make sure stockContent & userContent are defined in your HTML)
+  const stocksData = JSON.parse(stockContent || "[]");
+  const userData = JSON.parse(userContent || "[]");
+
+  // Get buttons
+  const saveButton = document.querySelector("#saveUser");
+  const deleteButton = document.querySelector("#deleteUser");
+
+  // Body styling
+  document.body.style.background = "linear-gradient(135deg, #dbeafe, #bfdbfe, #93c5fd)";
+  document.body.style.fontFamily = "'Poppins', sans-serif";
+  document.body.style.minHeight = "100vh";
+
+  /**
+   * Generate the user list dynamically
+   */
+  const generateUserList = (users, stocks) => {
+    const userList = document.querySelector(".user-list");
+    userList.innerHTML = "";
+
+    users.forEach(({ user, id }) => {
+      const listItem = document.createElement("li");
+      listItem.textContent = `${user.lastname}, ${user.firstname}`;
+      listItem.id = id;
+      listItem.classList.add("user-item");
+      listItem.style.transition = "transform 0.2s ease, background-color 0.2s ease";
+      listItem.style.padding = "8px";
+      listItem.style.cursor = "pointer";
+      listItem.style.background = "#f8fafc";
+
+      // Hover animation
+      listItem.addEventListener("mouseenter", () => (listItem.style.background = "#e0f2fe"));
+      listItem.addEventListener("mouseleave", () => (listItem.style.background = "#f8fafc"));
+
+      userList.appendChild(listItem);
+    });
+  };
+
+  /**
+   * Handle click on user list
+   */
+  const userListContainer = document.querySelector(".user-list");
+  userListContainer.addEventListener("click", (e) => {
+    const selectedId = e.target.id;
+    if (!selectedId) return;
+
+    const selectedUser = userData.find((u) => u.id == selectedId);
+    if (!selectedUser) return;
+
+    populateForm(selectedUser);
+    renderPortfolio(selectedUser, stocksData);
+  });
+
+  /**
+   * Fill the user form
+   */
+  const populateForm = ({ user, id }) => {
+    const fields = ["firstname", "lastname", "address", "city", "email"];
+    document.querySelector("#userID").value = id;
+
+    fields.forEach((field) => {
+      const input = document.querySelector(`#${field}`);
+      if (input) input.value = user[field] || "";
+    });
+  };
+
+  /**
+   * Render the user's portfolio
+   */
+  const renderPortfolio = (user, stocks) => {
+    const { portfolio } = user;
+    const portfolioContainer = document.querySelector(".portfolio-list");
+    portfolioContainer.innerHTML = "";
+
+    portfolio.forEach(({ symbol, owned }) => {
+      const card = document.createElement("div");
+      card.classList.add("portfolio-card");
+      card.innerHTML = `
+        <p><strong>${symbol}</strong></p>
+        <p>Shares: ${owned}</p>
+        <button class="view-btn" data-symbol="${symbol}">View</button>
+      `;
+
+      // Style card
+      Object.assign(card.style, {
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        background: "#ffffff",
+        borderRadius: "10px",
+        padding: "10px",
+        marginBottom: "8px",
+        boxShadow: "0 1px 6px rgba(0,0,0,0.1)",
+        animation: "fadeIn 0.4s ease"
+      });
+
+      portfolioContainer.appendChild(card);
+    });
+
+    // Delegate event for view buttons
+    portfolioContainer.onclick = (e) => {
+      if (e.target.tagName === "BUTTON" && e.target.dataset.symbol) {
+        viewStock(e.target.dataset.symbol, stocks);
+      }
+    };
+  };
+
+  /**
+   * Show stock info
+   */
+  const viewStock = (symbol, stocks) => {
+    const stock = stocks.find((s) => s.symbol === symbol);
+    if (!stock) return;
+
+    document.querySelector("#stockName").textContent = stock.name || "-";
+    document.querySelector("#stockSector").textContent = stock.sector || "-";
+    document.querySelector("#stockIndustry").textContent = stock.subIndustry || "-";
+    document.querySelector("#stockAddress").textContent = stock.address || "-";
+    document.querySelector("#logo").src = `logos/${symbol}.svg`;
+
+    const stockForm = document.querySelector(".stock-form");
+    Object.assign(stockForm.style, {
+      background: "linear-gradient(120deg, #e0f2fe, #f0f9ff)",
+      borderRadius: "10px",
+      transition: "background 0.4s ease"
+    });
+  };
+
+  /**
+   * Delete user
+   */
+  deleteButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    const userId = document.querySelector("#userID").value;
+    const index = userData.findIndex((u) => u.id == userId);
+
+    if (index >= 0) {
+      userData.splice(index, 1);
+      generateUserList(userData, stocksData);
+      document.querySelector(".portfolio-list").innerHTML = "";
+      document.querySelector("#userForm").reset();
+    }
+  });
+
+  /**
+   * Save (update) user
+   */
+  saveButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    const id = document.querySelector("#userID").value;
+    const user = userData.find((u) => u.id == id);
+    if (!user) return;
+
+    ["firstname", "lastname", "address", "city", "email"].forEach((field) => {
+      user.user[field] = document.querySelector(`#${field}`).value || "";
+    });
+
+    generateUserList(userData, stocksData);
+  });
+
+  // Fade-in animation for main elements
+  document.querySelectorAll(".user-list, .portfolio-list, .stock-form").forEach((el) => {
+    el.style.opacity = 0;
+    setTimeout(() => {
+      el.style.transition = "opacity 0.8s ease";
+      el.style.opacity = 1;
+    }, 200);
+  });
+
+  // Initialize
+  generateUserList(userData, stocksData);
+});
     ```
 
 3. You can now view the project in the browser by clicking the "Application" port in the Ports panel.
