@@ -31,14 +31,14 @@
         <h2>User Form</h2>
         <form class="userEntry">
           <input type=hidden id="userID" />
-          <label for="firstname">Name </label>
-          <input type=text id="firstname" class="one" />
-          <input type=text id="lastname" class="two" />
-          <label for="address">Address </label>
-          <input type=text id="address" class="one" />
-          <input type=text id="city" class="two" />
-          <label for="email">Email </label>
-          <input type=email id="email" class="both" />
+          <label for="firstname">Name:</label>
+          <input type=text placeholder="FirstName" id="firstname" class="one" />
+          <input type=text placeholder="LastName" id="lastname" class="two" />
+          <label for="address">Address:</label>
+          <input type=text placeholder="Address" id="address" class="one" />
+          <input type=text placeholder="City" id="city" class="two" />
+          <label for="email">Email:</label>
+          <input type=email placeholder="Email" id="email" class="both" />
           <button class="one" id="btnSave">Save</button>
           <button class="two" id="btnDelete">Delete</button>
         </form>
@@ -53,25 +53,18 @@
           </div>
         </div>
         <div class="StockDetails">
-          <h2>Details</h2>
-          <div class="stock-form">
-            <div class="logoContainer">
-              <img id="logo" />
-            </div>
-            <p class="stockLabel">Name</p>
-            <p id="stockName"></p>
-            <p class="stockLabel">Sector</p>
-            <p id="stockSector"></p>
-            <p class="stockLabel">Industry</p>
-            <p id="stockIndustry"></p>
-            <p class="stockLabel">Address</p>
-            <p id="stockAddress"></p>
+          <div class="details-container">
+            <h3>Stock Details</h3>
+            <div class="details-row"><span class="label">Name:</span> <span class="value" id="stockName"></span></div>
+            <div class="details-row"><span class="label">Sector:</span> <span class="value" id="stockSector"></span></div>
+            <div class="details-row"><span class="label">Industry:</span> <span class="value" id="stockIndustry"></span></div>
+            <div class="details-row"><span class="label">Address:</span> <span class="value" id="stockAddress"></span></div>
+            <img id="logo" src="" alt="Company Logo" class="stock-logo" />
           </div>
-
         </div>
       </div>
 
-    </section>
+    </section> 
 
 
   </main>
