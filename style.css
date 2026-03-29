@@ -42,6 +42,17 @@ h3 {
   cursor: pointer;
 }
 
+.user-list li:hover {
+  background-color: #e8f4f8;
+  transition: background-color 0.2s ease;
+}
+
+.user-list li.selected {
+  background-color: #1181B2;
+  color: white;
+  font-weight: 600;
+}
+
 .Details {
   display: grid;
   grid-template-columns: 1fr;
@@ -128,25 +139,109 @@ button:hover {
     grid-gap: 0.25em;
 }
 
-
-.stock-form {
-  display: grid;
-  grid-template-columns: 0.5fr 1.5fr ;
-  grid-gap: 0.25em;      
+.portfolio-list h3 {
+    background-color: #1181B2;
+    color: white;
+    padding: 0.5em;
+    margin: 0;
+    text-align: center;
+    font-size: 0.9em;
 }
 
-.stockLabel {
-    font-weight: bold;
+.portfolio-symbol {
+    padding: 0.5em;
+    border-bottom: 1px solid #eee;
+    margin: 0;
+    font-weight: 500;
+    color: #333;
 }
 
-.logoContainer {
-  grid-column: 1 / span 2
-
+.portfolio-shares {
+    padding: 0.5em;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+    margin: 0;
+    font-weight: 500;
 }
 
-#logo {
-padding: 0.5em;
-max-height: 200px;
-max-width: 400px;
-object-fit: cover;
+.portfolio-view-btn {
+    padding: 0.5em 0.75em;
+    background-color: #1181B2;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 0.85em;
+    margin: 0.25em;
+    font-weight: 600;
+    border-radius: 3px;
+}
+
+.portfolio-view-btn:hover {
+    background-color: #0d5a7a;
+    transition: background-color 0.2s ease;
+}
+
+
+.details-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 1em;
+}
+
+.details-container h3 {
+  margin: 0 0 0.5em 0;
+  border-bottom: 2px solid #1181B2;
+  padding-bottom: 0.5em;
+}
+
+.details-row {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+  padding: 0.5em 0;
+  border-bottom: 1px solid #eee;
+}
+
+.details-row:last-of-type {
+  border-bottom: none;
+}
+
+.details-row .label {
+  font-weight: 600;
+  color: #333;
+  min-width: 80px;
+}
+
+.details-row .value {
+  color: #555;
+  flex: 1;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  min-height: 180px;
+  margin-top: 1em;
+}
+
+.stock-logo {
+  max-height: 150px;
+  max-width: 200px;
+  object-fit: contain;
+  align-self: center;
+  background-color: #f5f5f5;
+  padding: 2em;
+  border-radius: 4px;
+  margin-top: 1em;
+}
+
+#stockName, #stockSector, #stockIndustry, #stockAddress {
+  margin: 0;
+  padding: 0.25em 0;
+  color: #333;
+  line-height: 1.5;
 }
