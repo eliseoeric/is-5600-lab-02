@@ -9,8 +9,11 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,400i,700" rel="stylesheet">
   <link href="style.css" rel="stylesheet">
 
+  <!-- DATA FILES -->
   <script src="/data/users.js"></script>
   <script src="/data/stocks-complete.js"></script>
+
+  <!-- MAIN JS -->
   <script src="/app.js"></script>
 </head>
 
@@ -19,31 +22,46 @@
   <header>
     <h1>Lab 02 | Stock Portfolio Dashboard</h1>
   </header>
+
   <main class="grid-container">
 
+    <!-- USERS -->
     <section class="user-list-container">
       <h2>Users</h2>
       <ul class="user-list"></ul>
     </section>
 
+    <!-- DETAILS -->
     <section class="Details">
+
+      <!-- USER FORM -->
       <div class="UserForm">
         <h2>User Form</h2>
+
         <form class="userEntry">
-          <input type=hidden id="userID" />
-          <label for="firstname">Name </label>
-          <input type=text id="firstname" class="one" />
-          <input type=text id="lastname" class="two" />
-          <label for="address">Address </label>
-          <input type=text id="address" class="one" />
-          <input type=text id="city" class="two" />
-          <label for="email">Email </label>
-          <input type=email id="email" class="both" />
-          <button class="one" id="btnSave">Save</button>
-          <button class="two" id="btnDelete">Delete</button>
+          <input type="hidden" id="userID" />
+
+          <label>Name</label>
+          <input type="text" id="firstname" class="one" />
+          <input type="text" id="lastname" class="two" />
+
+          <label>Address</label>
+          <input type="text" id="address" class="one" />
+          <input type="text" id="city" class="two" />
+
+          <label>Email</label>
+          <input type="email" id="email" class="both" />
+
+          <!-- ✅ FIXED BUTTONS WITH IDs -->
+          <button id="btnSave" class="one">Save</button>
+          <button id="btnDelete" class="two">Delete</button>
+
         </form>
       </div>
+
+      <!-- PORTFOLIO -->
       <div class="Portfolio">
+
         <div class="StockList">
           <h2>Portfolio</h2>
           <div class="portfolio-list">
@@ -52,30 +70,37 @@
             <h3>Actions</h3>
           </div>
         </div>
+
+        <!-- STOCK DETAILS -->
         <div class="StockDetails">
           <h2>Details</h2>
+
           <div class="stock-form">
+
             <div class="logoContainer">
               <img id="logo" />
             </div>
+
             <p class="stockLabel">Name</p>
             <p id="stockName"></p>
+
             <p class="stockLabel">Sector</p>
             <p id="stockSector"></p>
+
             <p class="stockLabel">Industry</p>
             <p id="stockIndustry"></p>
+
             <p class="stockLabel">Address</p>
             <p id="stockAddress"></p>
-          </div>
 
+          </div>
         </div>
+
       </div>
 
     </section>
 
-
   </main>
 
 </body>
-
 </html>
