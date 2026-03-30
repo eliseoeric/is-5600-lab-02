@@ -1,81 +1,89 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <title>Lab 02 | Stock Portfolio Dashboard</title>
+    <meta charset="utf-8" />
+    <title>Lab 02 | Stock Portfolio Dashboard</title>
 
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,400i,700" rel="stylesheet">
-  <link href="style.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
 
-  <script src="/data/users.js"></script>
-  <script src="/data/stocks-complete.js"></script>
-  <script src="/app.js"></script>
+   <script src="data/users.js"></script>
+<script src="data/stocks-complete.js"></script>
+   <script src="app.js" defer></script>
+    
 </head>
 
 <body>
+    <header>
+        <h1>Lab 02 | Stock Portfolio Dashboard</h1>
+    </header>
 
-  <header>
-    <h1>Lab 02 | Stock Portfolio Dashboard</h1>
-  </header>
-  <main class="grid-container">
+    <main class="grid-container">
+        
+        <section class="user-list-container">
+            <h2>Users</h2>
+            <ul class="user-list"></ul>
+        </section>
 
-    <section class="user-list-container">
-      <h2>Users</h2>
-      <ul class="user-list"></ul>
-    </section>
-
-    <section class="Details">
-      <div class="UserForm">
-        <h2>User Form</h2>
-        <form class="userEntry">
-          <input type=hidden id="userID" />
-          <label for="firstname">Name </label>
-          <input type=text id="firstname" class="one" />
-          <input type=text id="lastname" class="two" />
-          <label for="address">Address </label>
-          <input type=text id="address" class="one" />
-          <input type=text id="city" class="two" />
-          <label for="email">Email </label>
-          <input type=email id="email" class="both" />
-          <button class="one" id="btnSave">Save</button>
-          <button class="two" id="btnDelete">Delete</button>
-        </form>
-      </div>
-      <div class="Portfolio">
-        <div class="StockList">
-          <h2>Portfolio</h2>
-          <div class="portfolio-list">
-            <h3>Symbol</h3>
-            <h3># Shares</h3>
-            <h3>Actions</h3>
-          </div>
-        </div>
-        <div class="StockDetails">
-          <h2>Details</h2>
-          <div class="stock-form">
-            <div class="logoContainer">
-              <img id="logo" />
+        <section class="Details">
+            
+            <div class="UserForm">
+                <h2>User Form</h2>
+                <form class="userEntry" id="userEntry">
+                    <input type="hidden" id="userID" />
+                    
+                    <label for="firstname">Name</label>
+                    <input type="text" id="firstname" class="one" placeholder="First Name" />
+                    <input type="text" id="lastname" class="two" placeholder="Last Name" />
+                    
+                    <label for="address">Address</label>
+                    <input type="text" id="address" class="one" placeholder="Street Address" />
+                    <input type="text" id="city" class="two" placeholder="City" />
+                    
+                    <label for="email">Email</label>
+                    <input type="email" id="email" class="both" placeholder="Email Address" />
+                    
+                    <button type="button" class="one" id="btnSave">Save</button>
+                    <button type="button" class="two" id="btnDelete">Delete</button>
+                </form>
             </div>
-            <p class="stockLabel">Name</p>
-            <p id="stockName"></p>
-            <p class="stockLabel">Sector</p>
-            <p id="stockSector"></p>
-            <p class="stockLabel">Industry</p>
-            <p id="stockIndustry"></p>
-            <p class="stockLabel">Address</p>
-            <p id="stockAddress"></p>
-          </div>
 
-        </div>
-      </div>
+            <div class="Portfolio">
+                <h2>Portfolio</h2>
+                <div class="portfolio-list" id="portfolio-list">
+                    <div class="portfolio-header">
+                        <h3>Symbol</h3>
+                        <h3># Shares</h3>
+                        <h3>Actions</h3>
+                    </div>
+                    </div>
+            </div>
 
-    </section>
+            <div class="StockDetails">
+                <h2>Stock Details</h2>
+                <div class="stock-form">
+                    <div class="logoContainer">
+                        <img id="logo" src="" alt="Stock Logo" />
+                    </div>
+                    
+                    <p class="stockLabel">Name</p>
+                    <p id="stockName" class="stockValue"></p>
+                    
+                    <p class="stockLabel">Sector</p>
+                    <p id="stockSector" class="stockValue"></p>
+                    
+                    <p class="stockLabel">Industry</p>
+                    <p id="stockIndustry" class="stockValue"></p>
+                    
+                    <p class="stockLabel">Address</p>
+                    <p id="stockAddress" class="stockValue"></p>
+                </div>
+            </div>
 
-
-  </main>
-
+        </section>
+    </main>
 </body>
 
 </html>
